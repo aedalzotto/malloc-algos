@@ -1,11 +1,13 @@
 #include "file.h"
 #include <fstream>
 
-mmalgo_parser::mmalgo_parser(){
+mmalgo_parser::mmalgo_parser()
+{
 
 }
 
-void mmalgo_parser::open_file(string file_name){
+void mmalgo_parser::open_file(string file_name)
+{
     ifstream file_obj;
 
     try{
@@ -17,10 +19,12 @@ void mmalgo_parser::open_file(string file_name){
 
 }
 
-void mmalgo_parser::mmalgo_open_list(){
+void mmalgo_parser::open_list()
+{
     
 }
 
-void mmalgo_parser::mmalgo_open_tasks(){
+void mmalgo_parser::open_task()
+{
 
 }

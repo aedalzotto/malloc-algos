@@ -5,8 +5,8 @@
 class mmalgo_parser {
 public:
     mmalgo_parser();
-    void mmalgo_open_list();
-    void mmalgo_open_task();
+    void open_list();
+    void open_task();
 
 private:
     std::vector<int> list;
