@@ -49,6 +49,6 @@ $(CPGLADE): $(GLADEFILES)
 
 clean:
 	@echo "Cleaning..."
-	@$(RM) -rf $(BUILDDIR) $(EXEDIR) $(SHAREDIR)
+	@$(RM) -rf $(BUILDDIR) $(EXECDIR) $(SHAREDIR)
 
 .PHONY: clean
