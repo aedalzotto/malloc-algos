@@ -50,15 +50,18 @@ Gtk::Window *mmalgo_gui::mmalgo_main()
         throw std::runtime_error("Unable to access entry_folder widget");
     }
 
-    button_search->signal_clicked().connect(sigc::mem_fun(*this, &mmalgo_gui::on_button_search_clicked));
-    button_simulate->signal_clicked().connect(sigc::mem_fun(*this, &mmalgo_gui::on_button_simulate_clicked));
+    button_search->signal_clicked().connect(
+                sigc::mem_fun(*this, &mmalgo_gui::on_button_search_clicked));
+    button_simulate->signal_clicked().connect(
+                sigc::mem_fun(*this, &mmalgo_gui::on_button_simulate_clicked));
 
     return window_main;
 }
 
 void mmalgo_gui::on_button_search_clicked()
 {
-    Gtk::FileChooserDialog dialog("Selecione a pasta", Gtk::FileChooserAction::FILE_CHOOSER_ACTION_SELECT_FOLDER);
+    Gtk::FileChooserDialog dialog("Selecione a pasta",
+                    Gtk::FileChooserAction::FILE_CHOOSER_ACTION_SELECT_FOLDER);
     dialog.set_transient_for(*window_main);
 
     dialog.add_button("_Cancel", Gtk::ResponseType::RESPONSE_CANCEL);

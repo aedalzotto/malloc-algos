@@ -47,6 +47,12 @@ $(CPGLADE): $(GLADEFILES)
 	@$(MK) -p $(SHAREDIR)
 	@$(CP) $< $@
 
+test:
+	$(CC) test/tester.cpp src/management.cpp -o $(EXECDIR)/teste $(INCLUDES) $(PKGCFG) r $(CFLAGS)
+
+runtest:
+	$(EXECDIR)/tester
+
 clean:
 	@echo "Cleaning..."
 	@$(RM) -rf $(BUILDDIR) $(EXECDIR) $(SHAREDIR)
