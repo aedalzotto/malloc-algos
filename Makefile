@@ -21,10 +21,11 @@ LDFLAGS := -ldl -lboost_system -lboost_filesystem
 INCLUDES := -I./$(SRCDIR)/include
 
 GLADEFILES := $(wildcard $(SRCDIR)/*.glade)
+TESTDIR := Testes
 CPGLADE := $(addprefix $(SHAREDIR)/,$(notdir $(GLADEFILES)))
+CPTEST := $(addprefix $(SHAREDIR)/,$(TESTDIR))
 
-
-all: $(TARGET) $(CPGLADE)
+all: $(TARGET) $(CPGLADE) $(CPTEST)
 
 buildrun: all
 	./$(TARGET)
@@ -47,7 +48,12 @@ $(CPGLADE): $(GLADEFILES)
 	@$(MK) -p $(SHAREDIR)
 	@$(CP) $< $@
 
-test:
+$(CPTEST): $(TESTDIR)
+	@echo "Copying test files..."
+	@$(MK) -p $(SHAREDIR)
+	$(CP) -r $< $@ 
+
+test: $(CPTEST)
 	$(CC) test/tester.cpp src/management.cpp -o $(EXECDIR)/teste $(INCLUDES) $(PKGCFG) r $(CFLAGS)
 
 runtest:
