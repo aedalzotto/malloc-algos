@@ -1,5 +1,6 @@
 #include <boost/dll/runtime_symbol_info.hpp>
-#include <gtkmm.h>
+#include <gtkmm/application.h>
+#include <glibmm.h>
 #include <iostream>
 #include "management.h"
 #include "gui.h"

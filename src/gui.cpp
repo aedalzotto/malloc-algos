@@ -1,3 +1,5 @@
+#include <gtkmm/filechooserdialog.h>
+
 #include "gui.h"
 
 mmalgo_gui::mmalgo_gui()

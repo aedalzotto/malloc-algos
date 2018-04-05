@@ -1,7 +1,9 @@
 #ifndef MMALGO_GUI_H
 #define MMALGO_GUI_H
 
-#include <gtkmm.h>
+#include <gtkmm/radiobutton.h>
+#include <gtkmm/builder.h>
+#include <gtkmm/entry.h>
 #include <boost/dll/runtime_symbol_info.hpp>
 
 #include "management.h"
@@ -27,7 +29,6 @@ private:
     void on_button_simulate_clicked();
     Radio get_selected_radio();
 
-    Glib::RefPtr<Gio::Application> app;
     Glib::RefPtr<Gtk::Builder> builder_main;
     boost::filesystem::path path_glade;
     std::stringstream file_mmalgo;
