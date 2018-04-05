@@ -1,7 +1,10 @@
+#ifndef MMALGO_GUI_H
+#define MMALGO_GUI_H
+
 #include <gtkmm.h>
 #include <boost/dll/runtime_symbol_info.hpp>
 
-#include "file.h"
+#include "management.h"
 
 #include <iostream>
 
@@ -41,5 +44,8 @@ private:
     Gtk::RadioButton *radio_lucky;
 
     mmalgo_parser parser;
+    mmalgo_rithm manager;
 
 };
+
+#endif

@@ -164,7 +164,7 @@ void mmalgo_gui::on_button_simulate_clicked()
             manager.run_worst(parser);
             break;
         case Radio::LUCKY:
-            manager.run_lucky();
+            manager.run_lucky(parser);
             break;
     }
 
