@@ -128,18 +128,20 @@ bool mmalgo_parser::isInteger(const std::string &s)
 mem_list::mem_list(unsigned int id, unsigned int size)
 {
     this->id = id;
-    index.push_back(mem_index(size));
-}
-
-mem_index::mem_index(unsigned int size)
-{
-    is_hole = true;
-    start = 0;
-    this->size = size;
+    available = size;
 }
 
 jobs::jobs(unsigned int id, unsigned int size)
 {
     this->id = id;
     this->size = size;
+}
+
+unsigned int mmalgo_parser::get_list_number()
+{
+    return memory.size();
+}
+unsigned int mmalgo_parser::get_task_number()
+{
+    return task.size();
 }

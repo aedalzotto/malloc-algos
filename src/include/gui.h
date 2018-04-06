@@ -1,9 +1,7 @@
 #ifndef MMALGO_GUI_H
 #define MMALGO_GUI_H
 
-#include <gtkmm/radiobutton.h>
-#include <gtkmm/builder.h>
-#include <gtkmm/entry.h>
+#include <gtkmm.h>
 #include <boost/dll/runtime_symbol_info.hpp>
 
 #include "management.h"
@@ -28,6 +26,7 @@ private:
     void on_button_search_clicked();
     void on_button_simulate_clicked();
     Radio get_selected_radio();
+    void show_results(std::string algo);
 
     Glib::RefPtr<Gtk::Builder> builder_main;
     boost::filesystem::path path_glade;
@@ -43,6 +42,17 @@ private:
     Gtk::RadioButton *radio_best;
     Gtk::RadioButton *radio_worst;
     Gtk::RadioButton *radio_lucky;
+
+    Gtk::Dialog *dialog_results;
+    Gtk::Button *button_close;
+    Gtk::Label *label_algo_res;
+    Gtk::Label *label_unalloced;
+    Gtk::Label *label_time;
+    Gtk::Label *label_folder_res;
+    Gtk::Label *label_search;
+    Gtk::Label *label_frag;
+    Gtk::TextView *text_holes;
+
 
     mmalgo_parser parser;
     mmalgo_rithm manager;

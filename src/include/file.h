@@ -6,19 +6,11 @@
 #include <string>
 #include <fstream>
 
-class mem_index {
-public:
-    mem_index(unsigned int size);
-    bool is_hole;
-    unsigned int start;
-    unsigned int size;
-};
-
 class mem_list {
 public:
     mem_list(unsigned int id, unsigned int size);
     unsigned int id;
-    std::vector<mem_index> index;
+    unsigned int available;
 };
 
 class jobs {
@@ -34,11 +26,15 @@ public:
     void open_list(std::string file_name);
     void open_task(std::string file_name);
 
+    unsigned int get_list_number();
+    unsigned int get_task_number();
+    const std::vector<std::string> explode(const std::string& s, const char& c);
+
     std::vector<mem_list> memory;
     std::vector<jobs> task;
 
 private:
-    const std::vector<std::string> explode(const std::string& s, const char& c);
+    
     bool isInteger(const std::string &s);
 };
 

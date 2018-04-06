@@ -33,8 +33,9 @@ Author: Angelo Elias Dalzotto
   <!-- interface-description Rocket fuel static test -->
   <!-- interface-copyright 2018 Angelo Elias Dalzotto -->
   <!-- interface-authors Angelo Elias Dalzotto -->
-  <object class="GtkDialog">
+  <object class="GtkDialog" id="dialog_results">
     <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Resultados</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
       <object class="GtkBox">
@@ -46,7 +47,7 @@ Author: Angelo Elias Dalzotto
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton">
+              <object class="GtkButton" id="button_close">
                 <property name="label" translatable="yes">Fechar</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -74,6 +75,7 @@ Author: Angelo Elias Dalzotto
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="spacing">50</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
@@ -87,7 +89,17 @@ Author: Angelo Elias Dalzotto
                   </packing>
                 </child>
                 <child>
-                  <placeholder/>
+                  <object class="GtkLabel" id="label_algo_res">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">50</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="pack_type">end</property>
+                    <property name="position">1</property>
+                  </packing>
                 </child>
               </object>
               <packing>
@@ -100,6 +112,7 @@ Author: Angelo Elias Dalzotto
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="spacing">50</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
@@ -113,7 +126,17 @@ Author: Angelo Elias Dalzotto
                   </packing>
                 </child>
                 <child>
-                  <placeholder/>
+                  <object class="GtkLabel" id="label_folder_res">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">50</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="pack_type">end</property>
+                    <property name="position">1</property>
+                  </packing>
                 </child>
               </object>
               <packing>
@@ -126,6 +149,7 @@ Author: Angelo Elias Dalzotto
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="spacing">50</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
@@ -139,7 +163,17 @@ Author: Angelo Elias Dalzotto
                   </packing>
                 </child>
                 <child>
-                  <placeholder/>
+                  <object class="GtkLabel" id="label_time">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">50</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="pack_type">end</property>
+                    <property name="position">1</property>
+                  </packing>
                 </child>
               </object>
               <packing>
@@ -152,6 +186,7 @@ Author: Angelo Elias Dalzotto
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="spacing">50</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
@@ -165,7 +200,17 @@ Author: Angelo Elias Dalzotto
                   </packing>
                 </child>
                 <child>
-                  <placeholder/>
+                  <object class="GtkLabel" id="label_unalloced">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">50</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="pack_type">end</property>
+                    <property name="position">1</property>
+                  </packing>
                 </child>
               </object>
               <packing>
@@ -178,6 +223,7 @@ Author: Angelo Elias Dalzotto
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="spacing">50</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
@@ -191,7 +237,17 @@ Author: Angelo Elias Dalzotto
                   </packing>
                 </child>
                 <child>
-                  <placeholder/>
+                  <object class="GtkLabel" id="label_search">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">50</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="pack_type">end</property>
+                    <property name="position">1</property>
+                  </packing>
                 </child>
               </object>
               <packing>
@@ -204,6 +260,7 @@ Author: Angelo Elias Dalzotto
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="spacing">50</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
@@ -217,7 +274,17 @@ Author: Angelo Elias Dalzotto
                   </packing>
                 </child>
                 <child>
-                  <placeholder/>
+                  <object class="GtkLabel" id="label_frag">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">50</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="pack_type">end</property>
+                    <property name="position">1</property>
+                  </packing>
                 </child>
               </object>
               <packing>
@@ -230,10 +297,12 @@ Author: Angelo Elias Dalzotto
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="spacing">50</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="valign">start</property>
                     <property name="label" translatable="yes">Espaços livres:</property>
                   </object>
                   <packing>
@@ -243,7 +312,27 @@ Author: Angelo Elias Dalzotto
                   </packing>
                 </child>
                 <child>
-                  <placeholder/>
+                  <object class="GtkScrolledWindow">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hscrollbar_policy">never</property>
+                    <property name="shadow_type">in</property>
+                    <property name="propagate_natural_height">True</property>
+                    <child>
+                      <object class="GtkTextView" id="text_holes">
+                        <property name="height_request">200</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="hexpand">True</property>
+                        <property name="justification">right</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
                 </child>
               </object>
               <packing>
