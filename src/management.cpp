@@ -182,11 +182,31 @@ void mmalgo_rithm::run_worst(mmalgo_parser& parser)
     //Algoritmo abaixo
     //////////////////////////////////////////////////////
     
+    for(auto& job : parser.task){
 
-    //Cada lista acessada deve incrementar a variável searched
-    //Cada processo que falha a alocar deve incrementar variável failed
-    //Cada job alocado deve tirar o seu tamanho da variável size da lista
+        std::vector<mem_list>::iterator worst = parser.memory.begin();
+        
+        for(auto mem = parser.memory.begin(); mem != parser.memory.end(); ++mem){
+            searched++;
 
+            long int hole_sz = mem->available - job.size;
+            if(hole_sz < 0)
+                continue;
+
+            if(hole_sz > (long int)worst->available - (long int)job.size)
+                worst = mem;
+            
+        }
+
+        if(worst->available - job.size >= 0){
+            std::cout << "Alocou job " << job.id << " em bloco " << worst->id << std::endl;
+            worst->available -= job.size;
+        } else {
+            failed++;
+            std::cout << "Nenhum bloco disponível para job " << job.id << std::endl;
+        }
+
+    }
 
     /////////////////////////////////////////////////////
     //Fim do algoritmo
@@ -220,10 +240,7 @@ void mmalgo_rithm::run_lucky(mmalgo_parser& parser)
     //Algoritmo abaixo
     //////////////////////////////////////////////////////
     
-
-    //Cada lista acessada deve incrementar a variável searched
-    //Cada processo que falha a alocar deve incrementar variável failed
-    //Cada job alocado deve tirar o seu tamanho da variável size da lista
+    
 
 
 
