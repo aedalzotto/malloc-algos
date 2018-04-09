@@ -138,13 +138,13 @@ void mmalgo_rithm::run_best(mmalgo_parser& parser)
                 break;
             }
 
-            if(hole_sz < (long int)(best->available - job.size) ||
-                             (long int)(best->available - job.size) < 0)
+            if((mem->available < best->available && mem->available >= job.size)
+                || best->available < job.size)
                 best = mem;
             
         }
 
-        if((long int)(best->available - job.size) >= 0){
+        if(best->available >= job.size){
             std::cout << "Alocou job " << job.id << " em bloco " << best->id << std::endl;
             best->available -= job.size;
         } else {
