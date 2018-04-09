@@ -1,3 +1,6 @@
+#include <random>
+#include <algorithm>
+
 #include "management.h"
 
 mmalgo_rithm::mmalgo_rithm()
@@ -112,7 +115,7 @@ void mmalgo_rithm::run_next(mmalgo_parser& parser){
 
 void mmalgo_rithm::run_best(mmalgo_parser& parser)
 {
-        searched=0;
+    searched=0;
     failed = 0;
     //Qualquer preparação para o algoritmo acima
     auto then = std::chrono::high_resolution_clock::now();
@@ -175,7 +178,7 @@ void mmalgo_rithm::run_best(mmalgo_parser& parser)
 
 void mmalgo_rithm::run_worst(mmalgo_parser& parser)
 {
-        searched=0;
+    searched=0;
     failed = 0;
     //Qualquer preparação para o algoritmo acima
     auto then = std::chrono::high_resolution_clock::now();
@@ -233,16 +236,38 @@ void mmalgo_rithm::run_worst(mmalgo_parser& parser)
 
 void mmalgo_rithm::run_lucky(mmalgo_parser& parser)
 {
+    std::default_random_engine generator;
+    std::uniform_int_distribution<int> distribution(0,parser.memory.size()-1);
+    std::vector<int> indexes;
+
     searched=0;
     failed = 0;
     //Qualquer preparação para o algoritmo acima
     auto then = std::chrono::high_resolution_clock::now();
     //Algoritmo abaixo
     //////////////////////////////////////////////////////
-    
-    
 
+    for(auto& job : parser.task){
+        int roll;
+        indexes.clear();
+        while(indexes.size() < parser.memory.size()){
+            do {
+                roll = distribution(generator);
+            } while(std::find(indexes.begin(), indexes.end(), roll) != indexes.end());
+            indexes.push_back(roll);
+            searched++;
+            if(parser.memory[roll].available >= job.size)
+                break;
+        }
 
+        if(parser.memory[roll].available >= job.size){
+            parser.memory[roll].available -= job.size;
+            std::cout << "Alocou job " << job.id << " em bloco " << parser.memory[roll].id << std::endl;
+        } else {
+            failed++;
+            std::cout << "Nenhum bloco disponível para job " << job.id << std::endl;
+        }
+    }
 
     /////////////////////////////////////////////////////
     //Fim do algoritmo
