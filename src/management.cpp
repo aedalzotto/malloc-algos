@@ -9,7 +9,6 @@ void mmalgo_rithm::run_first(mmalgo_parser& parser)
 {
     searched=0;
     failed = 0;
-    //Percorre as tarefas
 
     auto then = std::chrono::high_resolution_clock::now();
     ///////////////////////////////////////////////////////////////
@@ -60,13 +59,36 @@ void mmalgo_rithm::run_next(mmalgo_parser& parser){
     auto then = std::chrono::high_resolution_clock::now();
     //Algoritmo abaixo
     //////////////////////////////////////////////////////
-    
-
     //Cada lista acessada deve incrementar a variável searched
     //Cada processo que falha a alocar deve incrementar variável failed
     //Cada job alocado deve tirar o seu tamanho da variável size da lista
 
+    std::vector<mem_list>::iterator it = parser.memory.begin();
+    auto last_alloc = parser.memory.end();
+    --it;
+    
+    for(auto& job : parser.task){
+        //Percorre as listas
+        bool alloc = false;
+        while(++it != last_alloc) {
+            if(it == parser.memory.end())
+                it = parser.memory.begin();
 
+            searched++;
+            if(it->available >= job.size){
+                std::cout << "Alocou job " << job.id << " em bloco " << it->id << std::endl;
+                it->available -= job.size;
+                last_alloc = it;
+                alloc = true;
+                break;
+            }
+        }
+
+        if(!alloc){
+            failed++;
+            std::cout << "Nenhum bloco disponível para job " << job.id << std::endl;
+        }
+    }
 
     /////////////////////////////////////////////////////
     //Fim do algoritmo
