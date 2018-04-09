@@ -192,14 +192,13 @@ void mmalgo_rithm::run_worst(mmalgo_parser& parser)
         
         for(auto mem = parser.memory.begin(); mem != parser.memory.end(); ++mem){
             searched++;
-
             if(mem->available > worst->available)
                 worst = mem;
         }
 
-        if((long int)(worst->available - job.size) >= 0){
-            std::cout << "Alocou job " << job.id << " em bloco " << worst->id << std::endl;
+        if(worst->available >= job.size){
             worst->available -= job.size;
+            std::cout << "Alocou job " << job.id << " em bloco " << worst->id << std::endl;
         } else {
             failed++;
             std::cout << "Nenhum bloco disponível para job " << job.id << std::endl;
@@ -211,6 +210,7 @@ void mmalgo_rithm::run_worst(mmalgo_parser& parser)
     //Fim do algoritmo
     duration = std::chrono::duration_cast<std::chrono::milliseconds>(
         std::chrono::high_resolution_clock::now() - then).count();
+
     holes.clear();
     total_holes = 0;
     for(auto& mem : parser.memory){
