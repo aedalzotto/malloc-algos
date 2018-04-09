@@ -138,12 +138,13 @@ void mmalgo_rithm::run_best(mmalgo_parser& parser)
                 break;
             }
 
-            if(hole_sz < (long int)best->available - (long int)job.size && (long int)best->available - (long int)job.size > 0)
+            if(hole_sz < (long int)(best->available - job.size) ||
+                             (long int)(best->available - job.size) < 0)
                 best = mem;
             
         }
 
-        if(best->available - job.size >= 0){
+        if((long int)(best->available - job.size) >= 0){
             std::cout << "Alocou job " << job.id << " em bloco " << best->id << std::endl;
             best->available -= job.size;
         } else {
@@ -192,16 +193,11 @@ void mmalgo_rithm::run_worst(mmalgo_parser& parser)
         for(auto mem = parser.memory.begin(); mem != parser.memory.end(); ++mem){
             searched++;
 
-            long int hole_sz = mem->available - job.size;
-            if(hole_sz < 0)
-                continue;
-
-            if(hole_sz > (long int)worst->available - (long int)job.size)
+            if(mem->available > worst->available)
                 worst = mem;
-            
         }
 
-        if(worst->available - job.size >= 0){
+        if((long int)(worst->available - job.size) >= 0){
             std::cout << "Alocou job " << job.id << " em bloco " << worst->id << std::endl;
             worst->available -= job.size;
         } else {
