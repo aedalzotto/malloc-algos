@@ -8,28 +8,43 @@ mmalgo_rithm::mmalgo_rithm()
 
 }
 
+bool mmalgo_rithm::fits(mem_list mem)
+{
+    searched++;
+    if(mem.available >= compare_to->size)
+        return true;
+    else
+        return false;
+}
+
 void mmalgo_rithm::run_first(mmalgo_parser& parser)
 {
     searched=0;
     failed = 0;
 
     auto then = std::chrono::high_resolution_clock::now();
+    auto last = parser.memory.begin();
     ///////////////////////////////////////////////////////////////
-    for(auto& job : parser.task){
-        bool alloc=false;
-        //Percorre as listas
-        for(auto& mem : parser.memory){
-            searched++;
-            if(mem.available >= job.size){
-                std::cout << "Alocou job " << job.id << " em bloco " << mem.id << std::endl;
-                mem.available -= job.size;
-                alloc=true;
-                break;
-            }
+    for(compare_to = parser.task.begin(); compare_to != parser.task.end(); ++compare_to){
+        auto it = std::find_if(last, parser.memory.end(),
+                        std::bind1st(std::mem_fun(&mmalgo_rithm::fits), this));
+
+        if(it != parser.memory.end()){
+            it->available -= compare_to->size;
+            last = it;
+            ++last;
+            continue;
         }
-        if(!alloc){
+        
+        it = std::find_if(parser.memory.begin(), last,
+                        std::bind1st(std::mem_fun(&mmalgo_rithm::fits), this)); 
+
+        if(it != last){
+            it->available -= compare_to->size;
+            last = it;
+            ++last;
+        } else {
             failed++;
-            std::cout << "Nenhum bloco disponível para job " << job.id << std::endl;
         }
     }
     ////////////////////////////////////////////////////////////////
@@ -63,32 +78,7 @@ void mmalgo_rithm::run_next(mmalgo_parser& parser){
     //Algoritmo abaixo
     //////////////////////////////////////////////////////
 
-    std::vector<mem_list>::iterator it = parser.memory.begin();
-    auto last_alloc = parser.memory.end();
-    --it;
-    
-    for(auto& job : parser.task){
-        //Percorre as listas
-        bool alloc = false;
-        while(++it != last_alloc) {
-            if(it == parser.memory.end())
-                it = parser.memory.begin();
 
-            searched++;
-            if(it->available >= job.size){
-                std::cout << "Alocou job " << job.id << " em bloco " << it->id << std::endl;
-                it->available -= job.size;
-                last_alloc = it;
-                alloc = true;
-                break;
-            }
-        }
-
-        if(!alloc){
-            failed++;
-            std::cout << "Nenhum bloco disponível para job " << job.id << std::endl;
-        }
-    }
 
     /////////////////////////////////////////////////////
     //Fim do algoritmo

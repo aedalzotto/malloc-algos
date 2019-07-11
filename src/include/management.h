@@ -30,6 +30,8 @@ private:
     unsigned int total_holes;
     unsigned long duration;
     std::vector<std::pair<unsigned int, unsigned int> > holes;
+    bool fits(mem_list mem);
+    std::vector<jobs>::iterator compare_to;
 
 };
 

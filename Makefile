@@ -15,7 +15,7 @@ TARGET := $(EXECDIR)/$(EXEC)
 SRCEXT := cpp
 SOURCES := $(wildcard $(SRCDIR)/*.$(SRCEXT))
 OBJECTS := $(addprefix $(BUILDDIR)/,$(notdir $(SOURCES:.$(SRCEXT)=.o)))
-CFLAGS := -g -Wall
+CFLAGS := -g -Wall -O3
 PKGCFG := `pkg-config --cflags --libs gtkmm-3.0`
 LDFLAGS := -ldl -lboost_system -lboost_filesystem
 INCLUDES := -I./$(SRCDIR)/include
